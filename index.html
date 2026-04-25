@@ -1787,7 +1787,6 @@ function initHeroGSAP() {
     .from('.floating-badge', { opacity: 0, scale: 0, stagger: 0.2, duration: 0.5, ease: 'back.out(2)' }, '-=0.3');
 }
 
-/* ─── EmailJS ─── */
 /* ─── Formspree Contact ─── */
 function initEmailJS() {
   document.getElementById('contact-form').addEventListener('submit', async (e) => {
@@ -1805,7 +1804,7 @@ function initEmailJS() {
     };
 
     try {
-      const res = await fetch('https://formspree.io/f/mrerjwnq', {  
+      const res = await fetch('https://formspree.io/f/xlgazqpw', {  
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data)
