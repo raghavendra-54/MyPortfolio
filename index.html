@@ -1790,11 +1790,8 @@ function initHeroGSAP() {
 }
 
 /* ─── EmailJS ─── */
+/* ─── Formspree Contact ─── */
 function initEmailJS() {
-  // IMPORTANT: Replace with your EmailJS credentials
-  // Get free account at emailjs.com
-  emailjs.init("eJKiqOcPb4QqZ9uHm");
-  
   document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
@@ -1802,19 +1799,22 @@ function initEmailJS() {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     btn.disabled = true;
 
-    const templateParams = {
-      user_name: document.getElementById('user_name').value,
-      user_email: document.getElementById('user_email').value,
+    const data = {
+      name: document.getElementById('user_name').value,
+      email: document.getElementById('user_email').value,
       subject: document.getElementById('subject').value,
-      message: document.getElementById('message').value,
-      to_name: 'Raghavendra'
+      message: document.getElementById('message').value
     };
 
     try {
-      // Uncomment and configure EmailJS when you have your keys:
-      await emailjs.send('service_g8zrwxb', 'template_3xeg8yl', templateParams);
+      const res = await fetch('https://formspree.io/f/mrerjwnq', {  
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('Failed');
       status.className = 'form-status success';
-      status.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.';
+      status.innerHTML = '<i class="fas fa-check-circle"></i> Message sent! I\'ll get back to you soon.';
       e.target.reset();
     } catch (err) {
       status.className = 'form-status error';
